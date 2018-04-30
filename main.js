@@ -1,4 +1,4 @@
-const onesColumn = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
+const onesColumn = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
 const tensColumn = ["", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
 const hundred = "hundred", thousand = "thousand";
 
@@ -8,6 +8,12 @@ const hundred = "hundred", thousand = "thousand";
 
 function columnize(num) {
     let ones = num % 10;
+    if (num % 100 < 20 && num % 100 > 9){
+        two = ""
+        ones = ((num) % 100);
+    } else {
+        let tens = ((num - ones) % 100);
+    }
     let tens = ((num - ones) % 100);
     let hundreds = ((num - ones - tens) % 1000);
     let thousands = ((num - ones - tens - hundreds) % 10000);
@@ -26,13 +32,13 @@ function printColumns(arr) {
     if (arr[2] > 0){
         number += onesColumn[arr[2]] + " " + hundred + " ";
     }
-    if (arr[3] > 0){
+    if (arr[1] > 0){
         number += tensColumn[arr[1]] + " ";
     }
-    if (arr[3] > 0){
+    if (arr[0] > 0){
         number += onesColumn[arr[0]] + " ";
     }
-    return number.toString();
+    return number.toString() + "<br />";
 }
 
     /*
@@ -42,8 +48,8 @@ function printColumns(arr) {
 (() => {
     let list = document.createElement("div");
 
-    for( let i=0;i<=1000;i++){
-        list.textContent += document.getElementById("words").textContent += printColumns( columnize( i + ", " ) ) ;
+    for( let i=1;i<=1000;i++){
+        list.innerHTML += printColumns( columnize(  i ) ) ;
     }
 
     document.getElementById("words").appendChild(list);
