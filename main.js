@@ -7,12 +7,13 @@ const hundred = "hundred", thousand = "thousand";
     */
 
 function columnize(num) {
+    let ones, tens;
     if (num % 100 < 20 && num % 100 > 9){
-        let ones = ((num) % 100);
-        let tens = 0;
+        ones = ((num) % 100);
+        tens = 0;
     } else {
-        let ones = num % 10;
-        let tens = ((num - ones) % 100);
+        ones = num % 10;
+        tens = ((num - ones) % 100);
     }
     let hundreds = ((num - ones - tens) % 1000);
     let thousands = ((num - ones - tens - hundreds) % 10000);
